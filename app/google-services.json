@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "23209180160",
+    "project_id": "papu-c09ca",
+    "storage_bucket": "papu-c09ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23209180160:android:e638dc4d05a8858f26ece5",
+        "android_client_info": {
+          "package_name": "com.example.papu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23209180160-fga3edbet55h3rpdfpp6lbm6nuqi2tl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4JRGSdDeIvoa1mqq9LFXahinklVAoGV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23209180160-fga3edbet55h3rpdfpp6lbm6nuqi2tl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
