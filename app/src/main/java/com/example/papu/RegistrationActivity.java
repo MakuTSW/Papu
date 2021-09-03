@@ -10,25 +10,24 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.papu.user.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
     private EditText emailTextView, passwordTextView;
     private Button Btn;
     private ProgressBar progressbar;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,18 +35,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        // taking FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        // initialising all views through id defined above
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
         Btn = findViewById(R.id.btnregister);
         progressbar = findViewById(R.id.progressbar);
 
         findViewById(R.id.toLogin).setOnClickListener( v ->
-                startActivity(new Intent(MainActivity.this, LoginActivity.class))
+                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class))
         );
 
+        // Set on Click Listener on Registration button
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -81,11 +82,37 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        EditText companyName = findViewById(R.id.companyName);
-                        writeNewUser(parseEmail(email), email, companyName.getText().toString());
+                        try {
+                            URL url = new URL("https://papu-c09ca-default-rtdb.europe-west1.firebasedatabase.app/users.json");
+                            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+                            httpCon.setDoOutput(true);
+                            httpCon.setRequestMethod("PUT");
+                            httpCon.connect();
+                            OutputStreamWriter out = new OutputStreamWriter(
+                                    httpCon.getOutputStream());
+                            EditText companyName = findViewById(R.id.companyName);
+                            out.write("\"" + parseEmail(email) + "\": {\n\"company\": \"" + companyName.getText().toString() + "\"\n}");
+                            out.close();
+                            Log.i("restApi", Integer.toString(httpCon.getResponseCode()));
+                            Log.i("restApi", httpCon.getResponseMessage());
+                            Toast.makeText(getApplicationContext(),
+                                    httpCon.getResponseCode() + httpCon.getResponseMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                            Log.i("restApi", "done");
+                        }catch (Exception exception){
+                            Toast.makeText(getApplicationContext(),
+                                    exception.toString(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                            Log.e("restApi", "undone");
+                            exception.printStackTrace();
+                        }
 
                         Toast.makeText(getApplicationContext(),
                                 "Registration successful!",
@@ -95,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         findViewById(R.id.progressbar).setVisibility(View.GONE);
 
                         Intent intent
-                                = new Intent(MainActivity.this,
-                                LoginActivity.class);
+                                = new Intent(RegistrationActivity.this,
+                                MainActivity.class);
                         startActivity(intent);
                     }
                     else {
@@ -116,15 +143,9 @@ public class MainActivity extends AppCompatActivity {
     private String parseEmail(String email) {
         String maliToUrl = "";
         for(int i=0; i<email.length(); i++) {
-            if(email.charAt(i) != '@' && email.charAt(i) != '.')
+            if(email.charAt(i) != '@' || email.charAt(i) != '.')
                 maliToUrl+=email.charAt(i);
         }
         return maliToUrl;
-    }
-
-    public void writeNewUser(String name, String email, String company) {
-        User user = new User(name, email, company);
-        System.out.println(name + " " + email + " " + company);
-        mDatabase.child("users").child(name).setValue(user);
     }
 }
