@@ -1,14 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/light_orange">
 
     <TextView
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Firebase Authentication"
-        android:textSize="20dp"
+        android:text="Papu.pl"
+        android:textColor="#FFFFFF"
+        android:textSize="80dp"
         />
-</RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="visible" />
+
+</LinearLayout>

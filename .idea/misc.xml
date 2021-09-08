@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Dev/Projects/Papu/app/src/main/res/layout/activity_home.xml" value="0.20260416666666667" />
+        <entry key="..\:/Dev/Projects/Papu/app/src/main/res/layout/activity_login.xml" value="0.23731884057971014" />
+        <entry key="..\:/Dev/Projects/Papu/app/src/main/res/layout/activity_main.xml" value="0.23731884057971014" />
+        <entry key="..\:/Dev/Projects/Papu/app/src/main/res/layout/activity_registration.xml" value="0.23731884057971014" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.11005434782608696" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11639492753623189" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.10507246376811594" />
