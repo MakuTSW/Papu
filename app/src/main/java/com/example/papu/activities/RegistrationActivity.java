@@ -3,13 +3,17 @@ package com.example.papu.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.papu.R;
+import com.example.papu.core.Role;
 import com.example.papu.core.User;
 import com.example.papu.repositories.UserRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,12 +26,18 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button btn;
     private ProgressBar progressbar;
     private UserRepository userRepository;
+    private Spinner roleSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        roleSpinner = (Spinner) findViewById(R.id.role);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,  R.array.roles, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roleSpinner.setAdapter(adapter);
 
         userRepository = new UserRepository();
         emailTextView = findViewById(R.id.email);
@@ -49,6 +59,8 @@ public class RegistrationActivity extends AppCompatActivity {
         String email = emailTextView.getText().toString();
         String password = passwordTextView.getText().toString();
         String company = companyTextView.getText().toString();
+        String role = roleSpinner.getSelectedItem().toString();
+
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(),
@@ -68,6 +80,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 .email(email)
                 .username(parseEmail(email))
                 .company(company)
+                .role(UserRepository.getUserRole(role))
                 .build();
 
         OnCompleteListener listener = (task) -> {

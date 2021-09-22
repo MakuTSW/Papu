@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         OnCompleteListener autoLoginSuccessListener = (task) -> {
             if (task.isSuccessful()) {
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Auto-login failed, please provide login credentials!",

@@ -38,6 +38,11 @@
         android:layout_height="wrap_content"
         android:hint="Your company name"/>
 
+    <Spinner
+        android:id="@+id/role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <!-- Button for register with text "Register" -->
     <Button
         android:id="@+id/btnregister"

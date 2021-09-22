@@ -1,8 +1,10 @@
 package com.example.papu.repositories;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.papu.activities.MainActivity;
+import com.example.papu.core.Role;
 import com.example.papu.core.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UserRepository {
-    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://papu-c09ca-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     public static String parseEmail(String email) {
@@ -33,7 +35,11 @@ public class UserRepository {
 
     public User getCurrentUser() {
         String email = firebaseAuth.getCurrentUser().getEmail();
-        return null;
+        return databaseReference.child("users")
+                .child(parseEmail(email))
+                .get()
+                .getResult()
+                .getValue(User.class);
     }
 
     public void registerUser(User user, String password, OnCompleteListener listener) {
@@ -45,6 +51,15 @@ public class UserRepository {
     public void loginUser(String email, String password, OnCompleteListener listener) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(listener);
+    }
 
+    public static Role getUserRole(String role){
+        if (Role.RESTAURANT.toString().equals(role.toUpperCase())) {
+            return Role.RESTAURANT;
+        } else if (Role.COURIER.toString().equals(role.toUpperCase())) {
+            return Role.COURIER;
+        } else if (Role.CUSTOMER.toString().equals(role.toUpperCase())) {
+            return Role.CUSTOMER;
+        } else throw new IllegalStateException("Incorrect role");
     }
 }
