@@ -3,6 +3,8 @@ package com.example.papu.repositories;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.papu.activities.MainActivity;
 import com.example.papu.core.Role;
 import com.example.papu.core.User;
@@ -11,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,13 +36,12 @@ public class UserRepository {
                 .setValue(user);
     }
 
-    public User getCurrentUser() {
+    public void getCurrentUser(OnCompleteListener onCompleteListener) {
         String email = firebaseAuth.getCurrentUser().getEmail();
-        return databaseReference.child("users")
+        databaseReference.child("users")
                 .child(parseEmail(email))
                 .get()
-                .getResult()
-                .getValue(User.class);
+                .addOnCompleteListener(onCompleteListener);
     }
 
     public void registerUser(User user, String password, OnCompleteListener listener) {

@@ -15,12 +15,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.papu.R;
+import com.example.papu.core.Role;
 import com.example.papu.core.User;
 import com.example.papu.repositories.UserRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -68,6 +70,16 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        OnCompleteListener<DataSnapshot> currentUserListener = (task) -> {
+            if (task.isSuccessful()) {
+                Role role = task.getResult().getValue(User.class).getRole();
+                Intent intent = new Intent(LoginActivity.this, role.getAppCompatActivity());
+                startActivity(intent);
+            } else {
+                Log.e("firebase", "Cannot get data");
+            }
+        };
+
         OnCompleteListener listener = (task) -> {
             if (task.isSuccessful()) {
                 saveLoginCredentials(email, password);
@@ -77,13 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                         .show();
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
 
-                User user = userRepository.getCurrentUser();
-                if (user != null)
-                Log.i("test",userRepository.getCurrentUser().toString());
-                else Log.e("test", "cannot find user");
-
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
+                userRepository.getCurrentUser(currentUserListener);
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Login failed!!",
@@ -92,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressbar.setVisibility(View.GONE);
             }
         };
+
 
         userRepository.loginUser(email, password, listener);
     }
