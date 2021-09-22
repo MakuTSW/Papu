@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User {
     private String username;

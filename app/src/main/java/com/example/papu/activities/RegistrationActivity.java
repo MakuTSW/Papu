@@ -91,9 +91,11 @@ public class RegistrationActivity extends AppCompatActivity {
                         .show();
                 findViewById(R.id.progressbar).setVisibility(View.GONE);
 
-                Intent intent
-                        = new Intent(RegistrationActivity.this,
-                        HomeActivity.class);
+                Intent intent = new Intent(
+                    RegistrationActivity.this,
+                    Role.valueOf(role.toUpperCase()).getAppCompatActivity()
+                );
+
                 startActivity(intent);
             } else {
                 Toast.makeText(
