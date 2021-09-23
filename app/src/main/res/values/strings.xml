@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Papu</string>
+    <string name="restaurant_address">Restaurant address</string>
+    <string name="active_orders">ACTIVE ORDERS</string>
+    <string name="historical_orders">Historical orders</string>
+    <string name="change_meals_list">Change meals list</string>
+    <string name="change_address">CHANGE ADDRESS</string>
+    <string name="manage_meals">MANAGE MEALS</string>
+    <string name="orders_history">ORDERS HISTORY</string>
 </resources>
