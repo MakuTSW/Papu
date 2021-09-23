@@ -17,6 +17,7 @@ import com.example.papu.core.Role;
 import com.example.papu.core.User;
 import com.example.papu.repositories.UserRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.database.DataSnapshot;
 
 import static com.example.papu.repositories.UserRepository.parseEmail;
 
@@ -93,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(
                     RegistrationActivity.this,
-                    Role.valueOf(role.toUpperCase()).getAppCompatActivity()
+                    LoginActivity.class
                 );
 
                 startActivity(intent);
