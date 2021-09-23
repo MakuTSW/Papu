@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Restaurant"/>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:text="Restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32dp"
+            android:gravity="center_horizontal"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/restaurantGridView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:columnCount="2"
+            android:padding="10dp"
+            android:alignmentMode="alignBounds"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="5">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight=".45"
+                android:layout_rowWeight=".45"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/restaurantAddress"
+                    android:text="Change address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/location"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="5"/>
+                <TextView
+                    android:id="@+id/test"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Change address"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/activeOrders"
+                android:text="Active orders"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight=".45"
+                android:layout_rowWeight=".45"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/historyOrders"
+                android:text="Historical orders"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight=".45"
+                android:layout_rowWeight=".45"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/meals"
+                android:text="Change meals list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight=".45"
+                android:layout_rowWeight=".45"
+                android:layout_margin="10dp"/>
+
+        </GridLayout>
+    </LinearLayout>
+</RelativeLayout>
