@@ -7,4 +7,6 @@
     <string name="change_address">CHANGE ADDRESS</string>
     <string name="manage_meals">MANAGE MEALS</string>
     <string name="orders_history">ORDERS HISTORY</string>
+    <string name="completed">Completed</string>
+    <string name="in_progress">In progress</string>
 </resources>
