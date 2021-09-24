@@ -1,10 +1,8 @@
 package com.example.papu.core;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.papu.activities.CourierActivity;
 import com.example.papu.activities.CustomerActivity;
-import com.example.papu.activities.RestaurantActivity;
+import com.example.papu.activities.restaurant.RestaurantActivity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
