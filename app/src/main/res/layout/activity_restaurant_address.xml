@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change your address"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"/>
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"/>
+    <EditText
+        android:id="@+id/road"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Road"/>
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number" />
+    <Button
+        android:id="@+id/SubmitAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adress"/>
+        android:text="Submit"/>
 </LinearLayout>
