@@ -11,4 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Customer {
     private String username;
+    private String city;
+    private String street;
+    private String number;
+    private String phone;
 }

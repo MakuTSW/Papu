@@ -30,6 +30,19 @@ public class RestaurantRepository {
         userRepository.getCurrentUser(currentUserListener);
     }
 
+    public void getAllRestaurants(OnCompleteListener onCompleteListener) {
+        databaseReference.child("restaurants")
+                .get()
+                .addOnCompleteListener(onCompleteListener);
+    }
+
+    public void getRestaurantByUsername(String username, OnCompleteListener onCompleteListener) {
+        databaseReference.child("restaurants")
+                .child(username)
+                .get()
+                .addOnCompleteListener(onCompleteListener);
+    }
+
     public void saveRestaurantData(String name, String city, String street, String number) {
         OnCompleteListener<DataSnapshot> updateRestaurantData = (e) -> {
             if (e.isSuccessful()) {

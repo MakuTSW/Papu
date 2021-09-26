@@ -1,12 +1,12 @@
 package com.example.papu.repositories;
 
-import com.example.papu.core.Courier;
 import com.example.papu.core.Customer;
 import com.example.papu.core.Restaurant;
 import com.example.papu.core.Role;
 import com.example.papu.core.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,16 +29,13 @@ public class UserRepository {
                 .child(user.getUsername())
                 .setValue(user);
         Role role = user.getRole();
-        if (role.equals(Role.COURIER)) {
-            Courier courier = Courier.builder()
-                    .username(user.getUsername())
-                    .build();
-            databaseReference.child("couriers")
-                    .child(user.getUsername())
-                    .setValue(courier);
-        } else if (role.equals(Role.CUSTOMER)) {
+        if (role.equals(Role.CUSTOMER)) {
             Customer customer = Customer.builder()
                     .username(user.getUsername())
+                    .city("")
+                    .number("")
+                    .phone("")
+                    .street("")
                     .build();
             databaseReference.child("customers")
                     .child(user.getUsername())
@@ -46,6 +43,10 @@ public class UserRepository {
         } else if (role.equals(Role.RESTAURANT)) {
             Restaurant restaurant = Restaurant.builder()
                     .username(user.getUsername())
+                    .name("")
+                    .city("")
+                    .number("")
+                    .street("")
                     .build();
             databaseReference.child("restaurants")
                     .child(user.getUsername())
@@ -72,11 +73,38 @@ public class UserRepository {
                 .addOnCompleteListener(listener);
     }
 
+    public void getCurrentCustomer(OnCompleteListener onCompleteListener) {
+        OnCompleteListener<DataSnapshot> currentUserListener = (e) -> {
+            if (e.isSuccessful()) {
+                String username = e.getResult().getValue(User.class).getUsername();
+                databaseReference.child("customers")
+                        .child(username)
+                        .get()
+                        .addOnCompleteListener(onCompleteListener);
+            }
+        };
+        getCurrentUser(currentUserListener);
+    }
+
+    public void saveCustomerData(String phoneNumber, String city, String street, String number) {
+        OnCompleteListener<DataSnapshot> updateRestaurantData = (e) -> {
+            if (e.isSuccessful()) {
+                Customer customer = e.getResult().getValue(Customer.class);
+                customer.setPhone(phoneNumber);
+                customer.setCity(city);
+                customer.setStreet(street);
+                customer.setNumber(number);
+                databaseReference.child("customers")
+                        .child(customer.getUsername())
+                        .setValue(customer);
+            }
+        };
+        getCurrentCustomer(updateRestaurantData);
+    }
+
     public static Role getUserRole(String role){
         if (Role.RESTAURANT.toString().equals(role.toUpperCase())) {
             return Role.RESTAURANT;
-        } else if (Role.COURIER.toString().equals(role.toUpperCase())) {
-            return Role.COURIER;
         } else if (Role.CUSTOMER.toString().equals(role.toUpperCase())) {
             return Role.CUSTOMER;
         } else throw new IllegalStateException("Incorrect role");

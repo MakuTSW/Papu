@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Order {
     private String customerUsername;
-    private String courierUsername;
     private String restaurantUsername;
     private List<Meal> orderMeals;
     private OrderState state;
+    private double totalPrice;
 }

@@ -1,7 +1,7 @@
 package com.example.papu.core;
 
 public enum OrderState {
-    RECEIVED,
+    CREATED,
     IN_PROGRESS,
     DELIVERY,
     COMPLETED

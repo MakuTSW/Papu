@@ -25,9 +25,7 @@
         </activity>
         <activity android:name=".activities.HomeActivity" >
         </activity>
-        <activity android:name=".activities.CourierActivity" >
-        </activity>
-        <activity android:name=".activities.CustomerActivity" >
+        <activity android:name=".activities.customer.CustomerActivity" >
         </activity>
         <activity android:name=".activities.restaurant.RestaurantActivity" >
         </activity>
@@ -40,6 +38,12 @@
         <activity android:name=".activities.restaurant.RestaurantOrderHistoryActivity" >
         </activity>
         <activity android:name=".activities.restaurant.AddMealActivity" >
+        </activity>
+        <activity android:name=".activities.customer.CustomerOrderActivity" >
+        </activity>
+        <activity android:name=".activities.customer.CustomerOrdersHistory" >
+        </activity>
+        <activity android:name=".activities.customer.CustomerAddressActivity" >
         </activity>
     </application>
 
