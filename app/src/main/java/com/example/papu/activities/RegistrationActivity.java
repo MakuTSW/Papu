@@ -23,7 +23,7 @@ import static com.example.papu.repositories.UserRepository.parseEmail;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText emailTextView, passwordTextView, companyTextView;
+    private EditText emailTextView, passwordTextView;
     private Button btn;
     private ProgressBar progressbar;
     private UserRepository userRepository;
@@ -43,7 +43,6 @@ public class RegistrationActivity extends AppCompatActivity {
         userRepository = new UserRepository();
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
-        companyTextView = findViewById(R.id.companyName);
 
         btn = findViewById(R.id.btnregister);
         progressbar = findViewById(R.id.progressbar);
@@ -59,20 +58,19 @@ public class RegistrationActivity extends AppCompatActivity {
         progressbar.setVisibility(View.VISIBLE);
         String email = emailTextView.getText().toString();
         String password = passwordTextView.getText().toString();
-        String company = companyTextView.getText().toString();
         String role = roleSpinner.getSelectedItem().toString();
 
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(),
-                    "Please enter email!!",
+                    "Please enter email.",
                     Toast.LENGTH_LONG)
                     .show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(),
-                    "Please enter password!!",
+                    "Please enter password.",
                     Toast.LENGTH_LONG)
                     .show();
             return;
@@ -80,14 +78,13 @@ public class RegistrationActivity extends AppCompatActivity {
         User newUser = User.builder()
                 .email(email)
                 .username(parseEmail(email))
-                .company(company)
                 .role(UserRepository.getUserRole(role))
                 .build();
 
         OnCompleteListener listener = (task) -> {
             if (task.isSuccessful()) {
                 Toast.makeText(getApplicationContext(),
-                        "Registration successful!",
+                        "Registration successful.",
                         Toast.LENGTH_LONG)
                         .show();
                 findViewById(R.id.progressbar).setVisibility(View.GONE);
@@ -101,11 +98,10 @@ public class RegistrationActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(
                         getApplicationContext(),
-                        "Registration failed!!"
-                                + " Please try again later",
+                        "Registration failed,\n"
+                                + "please try again later.",
                         Toast.LENGTH_LONG)
                         .show();
-
                 findViewById(R.id.progressbar).setVisibility(View.GONE);
             }
         };

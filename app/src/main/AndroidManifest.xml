@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".activities.restaurant.RestaurantOrderHistoryActivity" >
         </activity>
+        <activity android:name=".activities.restaurant.AddMealActivity" >
+        </activity>
     </application>
 
 </manifest>

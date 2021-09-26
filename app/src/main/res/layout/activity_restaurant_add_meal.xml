@@ -6,40 +6,42 @@
     android:padding="20dp">
 
     <TextView
+        android:text="Add new meal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Change your address"
-        android:textSize="30dp"
-        android:gravity="center_horizontal"/>
+        android:textSize="32dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
     <EditText
-        android:id="@+id/RestaurantName"
+        android:id="@+id/NewMealName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Restaurant name"
+        android:hint="Meal name"
         android:layout_marginTop="20dp"/>
     <EditText
-        android:id="@+id/RestaurantCity"
+        android:id="@+id/NewMealPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="City"
+        android:hint="Meal price"
         android:layout_marginTop="20dp"/>
+
     <EditText
-        android:id="@+id/RestaurantStreet"
+        android:id="@+id/NewMealIngredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Street"
+        android:hint="Ingredients"
         android:layout_marginTop="20dp"/>
-    <EditText
-        android:id="@+id/RestaurantNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Number"
-        android:layout_marginTop="20dp"/>
+
     <Button
-        android:id="@+id/SubmitAddress"
+        android:id="@+id/NewMealSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Submit"
+        />
+
+
+
 </LinearLayout>

@@ -32,12 +32,6 @@
         android:hint="Enter your Password"
         android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/companyName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your company name"/>
-
     <Spinner
         android:id="@+id/role"
         android:layout_width="match_parent"
@@ -61,5 +55,6 @@
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 </LinearLayout>
