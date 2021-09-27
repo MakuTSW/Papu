@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.papu.R;
 import com.example.papu.core.Order;
@@ -23,11 +24,14 @@ public class RestaurantActivity extends AppCompatActivity {
 
     RestaurantRepository restaurantRepository = new RestaurantRepository();
     OrderRepository orderRepository = new OrderRepository();
-
+    TextView inProgressAmount;
+    TextView completedAmount;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
+        inProgressAmount = findViewById(R.id.inProgressMealsAmount);
+        completedAmount = findViewById(R.id.completedMealsAmount);
 
         LinearLayout address = findViewById(R.id.restaurantAddress);
         address.setOnClickListener(view -> {
@@ -71,8 +75,7 @@ public class RestaurantActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        TextView inProgressAmount = findViewById(R.id.inProgressMealsAmount);
-        TextView completedAmount = findViewById(R.id.completedMealsAmount);
+
 
 
 
@@ -104,4 +107,38 @@ public class RestaurantActivity extends AppCompatActivity {
         };
         restaurantRepository.getCurrentRestaurant(setActiveDataForRestaurantUsername);
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        OnCompleteListener<DataSnapshot> setActiveDataForRestaurantUsername = (e) -> {
+            if (e.isSuccessful()) {
+                Restaurant restaurant = e.getResult().getValue(Restaurant.class);
+
+                OnCompleteListener<DataSnapshot> setActiveData = (f) -> {
+                    if (f.isSuccessful()) {
+                        List<Order> allOrders = new ArrayList<>();
+                        f.getResult().getChildren().forEach(snap -> {
+                            if (snap.getValue(Order.class).getRestaurantUsername().equals(restaurant.getUsername())){
+                                allOrders.add(snap.getValue(Order.class));
+                            }
+                        });
+                        long completed = allOrders.stream()
+                                .filter(order -> order.getState().equals(OrderState.COMPLETED))
+                                .count();
+                        long inProgress = allOrders.stream()
+                                .filter(order -> !order.getState().equals(OrderState.COMPLETED))
+                                .count();
+                        inProgressAmount.setText(Long.toString(inProgress));
+                        completedAmount.setText(Long.toString(completed));
+                    }
+                };
+
+                orderRepository.getOrders(setActiveData);
+            }
+        };
+        restaurantRepository.getCurrentRestaurant(setActiveDataForRestaurantUsername);
+    }
+
 }
