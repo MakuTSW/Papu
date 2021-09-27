@@ -62,6 +62,13 @@ public class UserRepository {
                 .addOnCompleteListener(onCompleteListener);
     }
 
+    public void getCustomerByUsername(String username, OnCompleteListener onCompleteListener) {
+        databaseReference.child("customers")
+                .child(username)
+                .get()
+                .addOnCompleteListener(onCompleteListener);
+    }
+
     public void registerUser(User user, String password, OnCompleteListener listener) {
         firebaseAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnSuccessListener(result -> createUser(user))

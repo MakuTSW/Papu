@@ -29,8 +29,6 @@
         </activity>
         <activity android:name=".activities.restaurant.RestaurantActivity" >
         </activity>
-        <activity android:name=".activities.restaurant.RestaurantActiveOrdersActivity" >
-        </activity>
         <activity android:name=".activities.restaurant.RestaurantAddressActivity" >
         </activity>
         <activity android:name=".activities.restaurant.RestaurantChangeMealsActivity" >

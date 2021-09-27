@@ -11,6 +11,19 @@
         android:textSize="20sp"
         android:text="Meal name: " />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
     <TextView
         android:id="@+id/Ingredients"
         android:layout_width="wrap_content"

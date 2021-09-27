@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/HistoryCustomerAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Customer data: " />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <TextView
+        android:id="@+id/HistoryOrderProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Products: "/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <TextView
+        android:id="@+id/HistoryOrderTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Total price: "/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <TextView
+        android:id="@+id/HistoryOrderState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="State: "/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Previous state"
+            android:id="@+id/OrderPreviousState"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next state"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/OrderNextState"/>
+    </LinearLayout>
+
+</LinearLayout>
